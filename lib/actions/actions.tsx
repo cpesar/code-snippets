@@ -1,6 +1,7 @@
 "use server";
 
-import { db } from "@/app/db";
+import { prisma } from "@/db/prisma";
+
 import { redirect } from "next/navigation";
 import { SnippetShowPageProps } from "@/types";
 import { notFound } from "next/navigation";
@@ -12,7 +13,7 @@ export async function createSnippet(formData: FormData) {
   const code = formData.get("code") as string;
 
   // Create a new record in the database
-  const snippet = await db.snippet.create({
+  const snippet = await prisma.snippet.create({
     data: {
       title,
       code,
@@ -25,7 +26,7 @@ export async function createSnippet(formData: FormData) {
 
 // Get all snippets
 export async function getSnippets() {
-  const snippets = await db.snippet.findMany();
+  const snippets = await prisma.snippet.findMany();
 
   if (!snippets) {
     return notFound();
@@ -36,7 +37,7 @@ export async function getSnippets() {
 
 // Get a single snippet
 export async function getSnippet(id: string) {
-  const snippet = await db.snippet.findFirst({
+  const snippet = await prisma.snippet.findFirst({
     where: {
       id: parseInt(id),
     },
