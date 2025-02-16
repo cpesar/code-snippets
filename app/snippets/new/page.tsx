@@ -1,6 +1,15 @@
+"use client";
+
 import { createSnippet } from "@/lib/actions/snippet-actions";
+import Editor from "@monaco-editor/react";
+import { useState } from "react";
 
 const SnippetCreatePage = () => {
+  const [code, setCode] = useState("");
+
+  const handleEditorChange = (value: string = "") => {
+    setCode(value);
+  };
   return (
     <form action={createSnippet}>
       <h3 className="font-bold m-3">Create a Snippet</h3>
@@ -20,10 +29,18 @@ const SnippetCreatePage = () => {
           <label className="w-12" htmlFor="code">
             Code
           </label>
-          <textarea
+          {/* <textarea
             name="code"
             className="border rounded p-2 w-full"
             id="code"
+          /> */}
+          <Editor
+            height="40vh"
+            theme="vs-dark"
+            language="javascript"
+            defaultValue=""
+            options={{ minimap: { enabled: false } }}
+            onChange={handleEditorChange}
           />
         </div>
 
