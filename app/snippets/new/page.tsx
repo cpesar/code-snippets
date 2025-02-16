@@ -1,4 +1,4 @@
-import { createSnippet } from "@/lib/actions/actions";
+import { createSnippet } from "@/lib/actions/snippet-actions";
 
 const SnippetCreatePage = () => {
   return (

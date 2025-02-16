@@ -1,4 +1,4 @@
-import { getSingleSnippet } from "@/lib/actions/actions";
+import { getSingleSnippet } from "@/lib/actions/snippet-actions";
 import SnippetEditForm from "@/components/snippet-edit-form";
 
 interface SnippetEditPageProps {

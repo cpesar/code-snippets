@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/db/prisma";
-
 import { redirect } from "next/navigation";
 import { SnippetShowPageProps } from "@/types";
 import { notFound } from "next/navigation";
@@ -48,4 +47,21 @@ export async function getSingleSnippet(id: string) {
   }
 
   return snippet;
+}
+
+// Edit a snippet
+export async function editSnippet(id: number, code: string) {
+  await prisma.snippet.update({
+    where: { id },
+    data: { code },
+  });
+  redirect(`/snippets/${id}`);
+}
+
+// Delete a snippet
+export async function deleteSnippet(id: number) {
+  await prisma.snippet.delete({
+    where: { id },
+  });
+  redirect("/");
 }

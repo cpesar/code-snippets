@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSnippets } from "@/lib/actions/actions";
+import { getSnippets } from "@/lib/actions/snippet-actions";
 
 const HomePage = async () => {
   const snippets = await getSnippets();

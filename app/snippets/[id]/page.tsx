@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getSingleSnippet } from "@/lib/actions/actions";
+import { getSingleSnippet, deleteSnippet } from "@/lib/actions/snippet-actions";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -15,6 +15,8 @@ const SnippetShowPage = async (props: {
 
   const snippet = await getSingleSnippet(id);
 
+  const deleteSnippetAction = deleteSnippet.bind(null, snippet.id);
+
   return (
     <div>
       <div className="flex m-4 justify-between items-center">
@@ -26,7 +28,9 @@ const SnippetShowPage = async (props: {
           >
             Edit
           </Link>
-          <button className="p-2 border rounded">Delete</button>
+          <form action={deleteSnippetAction}>
+            <button className="p-2 border rounded">Delete</button>
+          </form>
         </div>
       </div>
       <pre className="p-3 border rounded bg-gray-200 border-gray-200">
