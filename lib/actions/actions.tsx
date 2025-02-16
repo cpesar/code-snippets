@@ -36,7 +36,7 @@ export async function getSnippets() {
 }
 
 // Get a single snippet
-export async function getSnippet(id: string) {
+export async function getSingleSnippet(id: string) {
   const snippet = await prisma.snippet.findFirst({
     where: {
       id: parseInt(id),
