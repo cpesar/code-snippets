@@ -1,5 +1,9 @@
 import { Metadata } from "next";
-import { getSingleSnippet, deleteSnippet } from "@/lib/actions/snippet-actions";
+import {
+  getSingleSnippet,
+  deleteSnippet,
+  getSnippets,
+} from "@/lib/actions/snippet-actions";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -41,3 +45,13 @@ const SnippetShowPage = async (props: {
 };
 
 export default SnippetShowPage;
+
+export async function generateStaticParams() {
+  const snippets = await getSnippets();
+
+  return snippets.map((snippet) => {
+    return {
+      id: snippet.id.toString(),
+    };
+  });
+}
